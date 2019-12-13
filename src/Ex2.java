@@ -42,6 +42,50 @@ public class Ex2
     public static int[][][] rotate90(int[][][] im)
     {
 
+           int [][] arr = {{1,2,3},{4,5,6},{7,8,9}};
+    int temp;
+    int width = arr[0].length;
+    int height = arr.length;
+    
+    for(int i = 0; i < arr.length; i++)
+    {
+  
+      for(int j = 0; j < arr[0].length;j++)
+      {
+        System.out.print(arr[i][j]);
+      }
+       System.out.println("");
+    }
+    
+    /////////////////////////////////
+    
+     for(int i = 0; i < arr.length/2; i++)
+    {
+  
+      for(int j = 0; j < arr[0].length;j++)
+      {
+       		temp =  arr[i][j];
+        	arr[i][j] = arr[height -j-1][width -i-1];
+        	arr[height -j-1][width -i-1] = temp;
+        	
+      }
+       
+    }
+    
+    
+    //////////////////////////////////
+    
+        System.out.println("------------------------");
+     for(int i = 0; i < arr.length; i++)
+    {
+  
+      for(int j = 0; j < arr[0].length;j++)
+      {
+        System.out.print(arr[i][j]);
+      }
+       System.out.println("");
+    }
+    
 
         return im;
     }

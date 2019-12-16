@@ -10,8 +10,8 @@ public class Ex2 {
         //MyImageIO.writeImageToFile("/home/elonezra/IdeaProjects/myMath/myMath/EX2/src/imagegray",rgb2gray(im));
 
 
-        MyImageIO.writeImageToFile("C:\\Users\\elone\\Downloads\\pic_program-master\\pic_program-master\\src\\pic\\smooth", Smooth(im, 1));
-
+        MyImageIO.writeImageToFile("C:\\Users\\elone\\Downloads\\pic_program-master\\pic_program-master\\src\\pic\\smooth", Smooth(im, 0));
+        System.out.println("finised");
     }
 
     /**
@@ -76,7 +76,10 @@ public class Ex2 {
         int coulm = img[0][0].length;
         int[][][] new_arr = new int[3][line][coulm];
         int sum = 0;
-        int element_counter = 0;
+        int count_val = 0;
+        int step = (2*n+1)/2;
+        int h_p_smal = 0;
+        int w_p_smal = 0;
 
         int[][][] temp = new int[3][2 * n + 1][2 * n + 1];
 
@@ -86,30 +89,36 @@ public class Ex2 {
                 for (int j = 0; j < img[0][0].length-1; j++)
                 {
                     sum = 0;
-                    for (int t = 0; t < temp.length; t++) {
+                    count_val = 0;
+
                         for (int p = 0; p < temp[0].length; p++)
                             for (int q = 0; q < temp[0][0].length; q++) {
-                                temp[t][p][q] = 0;
+                                temp[0][p][q] = 0;
                             }
-                    }
 
-                    for (int t = 0; t < temp.length; t++) {
-                        for (int p = -(2*n+1)/2; p < temp[0].length+(2*n+1)/2; p++)
-                            for (int q = -(2*n+1)/2; q < temp[0][0].length+(2*n+1)/2; q++) {
-                                if (i + p > 0 || p < img[0].length-1 || j + p > 0 || q < img[0][0].length-1)
-                                    temp[t][p + (2*n+1)/2 ][q + (2*n+1)/2 ] = 0;//= img[t][i + p][j + p];
+
+
+
+                        for (int p =0; p < temp[0].length; p++)
+                            for (int q = 0; q < temp[0][0].length; q++) {
+                                w_p_smal = i - step + p;
+                                h_p_smal = j - step + q;
+
+                                if ((w_p_smal >= 0 && w_p_smal < img[0].length) && (h_p_smal >= 0 && h_p_smal < img[0][0].length))
+                                {
+                                    temp[0][p][q] = img[k][w_p_smal ][h_p_smal ];
+                                    count_val++;
+                                }
                             }
-                    }
 
-                    for (int t = 0; t < temp.length; t++) {
+
+
                         for (int p = 0; p < temp[0].length; p++)
                             for (int q = 0; q < temp[0][0].length; q++) {
-                                sum += temp[t][p][q];
+                                sum += temp[0][p][q];
                             }
-                    }
-                    new_arr[k][i][j] = sum / (2 * n+1 ) * (2 * n+1);
-                    if(new_arr[k][i][j] > 255)
-                        new_arr[k][i][j] =255;
+                    new_arr[k][i][j] = (sum / count_val);
+
                 }
             }
 
